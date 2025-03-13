@@ -9,9 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@magicui/system": "latest"
+    "@studio-freight/lenis": "^1.0.27"
   },
   "devDependencies": {
-    "vite": "latest"
+    "vite": "^5.0.0"
   }
 }
