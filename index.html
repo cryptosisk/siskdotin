@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Siskin</title>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.27/dist/lenis.min.js"></script>
+    <script src="https://unpkg.com/@magicui/system"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="video-background">
+        <video autoplay muted loop playsinline id="bgVideo">
+            <source src="videos/bg1-noise.mp4" type="video/mp4">
+        </video>
+    </div>
+    <div class="container">
+        <main>
+            <svg id="filters" class="fixed">
+                <defs>
+                    <filter id="threshold">
+                        <feColorMatrix
+                            in="SourceGraphic"
+                            type="matrix"
+                            values="1 0 0 0 0
+                                    0 1 0 0 0
+                                    0 0 1 0 0
+                                    0 0 0 255 -140"/>
+                    </filter>
+                </defs>
+            </svg>
+            <section id="home" class="hero">
+                <div class="morphing-title">
+                    <span class="text1">Max Siskin</span>
+                    <span class="text2">Developer</span>
+                </div>
+            </section>
+            <div class="marquee-container">
+                <div class="marquee">
+                    <div class="marquee-content"></div>
+                    <div class="marquee-content" aria-hidden="true"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
