@@ -171,6 +171,14 @@ section {
   font-size: clamp(2rem, 10vw, 5rem);
   font-weight: 700;
   filter: url(#threshold) blur(0.48px);
+  visibility: hidden; /* Hide initially */
+  opacity: 0; /* Start fully transparent */
+  transition: visibility 0s, opacity 0.3s ease; /* Smooth fade in */
+}
+
+.morphing-title.initialized {
+  visibility: visible;
+  opacity: 1;
 }
 
 .morphing-title span {
@@ -180,6 +188,7 @@ section {
   display: inline-block;
   width: 100%;
   color: #ffffff;
+  opacity: 0; /* Start with spans hidden */
 }
 
 /* Mobile-first responsive design */

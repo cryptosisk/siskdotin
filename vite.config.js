@@ -1,22 +1,26 @@
 // vite.config.js
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig } from 'vite';
 
-export default defineConfig(({ command, mode }) => {
-  // Load env file based on mode
-  const env = loadEnv(mode, process.cwd(), '');
-
-  return {
-    // Enable environment variables
-    envPrefix: 'VITE_',
-    // Make env variables available
-    define: {
-      __ENV__: JSON.stringify(env)
+export default defineConfig({
+  // Enable environment variables
+  envPrefix: 'VITE_',
+  // Configure server
+  server: {
+    watch: {
+      usePolling: true
     },
-    // Log configuration
-    server: {
-      watch: {
-        ignored: ['!**/node_modules/**']
+    hmr: {
+      overlay: true
+    }
+  },
+  // Configure build
+  build: {
+    sourcemap: true,
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
       }
     }
-  };
+  }
 });
