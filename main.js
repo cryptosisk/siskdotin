@@ -7,7 +7,16 @@ const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/
 
 // Configure video source and settings based on device
 const videoSource = video.querySelector('source');
-videoSource.src = isMobile ? 'videos/iosbg.mp4' : 'videos/bg2.mp4';
+const mobileVideoUrl = import.meta.env.VITE_VIDEO_MOBILE_URL;
+const desktopVideoUrl = import.meta.env.VITE_VIDEO_DESKTOP_URL;
+
+// Verify environment variables
+console.log('Environment check:', {
+    isMobile,
+    videoSource: isMobile ? mobileVideoUrl : desktopVideoUrl
+});
+
+videoSource.src = isMobile ? mobileVideoUrl : desktopVideoUrl;
 
 // Apply mobile-specific optimizations
 if (isMobile) {
