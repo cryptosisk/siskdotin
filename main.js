@@ -1,5 +1,30 @@
-// Handle video background
+// Handle video background with mobile optimization
 const video = document.getElementById('bgVideo');
+
+// Enhanced mobile detection including tablets
+const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+// Configure video source and settings based on device
+const videoSource = video.querySelector('source');
+videoSource.src = isMobile ? 'videos/iosbg.mp4' : 'videos/bg2.mp4';
+
+// Apply mobile-specific optimizations
+if (isMobile) {
+    video.setAttribute('playsinline', ''); // Ensure inline playback on iOS
+    video.setAttribute('preload', 'auto'); // Preload for smoother mobile experience
+    video.style.objectFit = 'cover'; // Ensure proper scaling on mobile
+}
+
+// Load video with error handling
+try {
+    video.load();
+} catch (e) {
+    console.warn('Video loading failed:', e);
+    // Fallback to static background if video fails
+    video.style.display = 'none';
+    document.querySelector('.video-background').style.backgroundColor = '#000';
+}
 
 // Optimize video playback and fitting
 const optimizeVideo = () => {
@@ -45,8 +70,8 @@ video.addEventListener('stalled', () => {
 });
 
 // Morphing text effect configuration
-const MORPH_TIME = 1.5;
-const COOLDOWN_TIME = 0.5;
+const MORPH_TIME = 2.25;
+const COOLDOWN_TIME = 0.1;
 
 class MorphingText {
   constructor(texts) {
