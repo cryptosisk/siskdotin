@@ -193,6 +193,13 @@ section {
 
 /* Mobile-first responsive design */
 @media (max-width: 480px) {
+  #bgVideo {
+    object-position: center bottom;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
   .marquee-content .post {
     display: flex;
     flex-direction: column;

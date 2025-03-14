@@ -80,8 +80,13 @@ const initializeVideo = async () => {
         const optimizeVideo = () => {
             const windowAspect = window.innerWidth / window.innerHeight;
             const videoAspect = video.videoWidth / video.videoHeight;
+            const isMobileView = window.innerWidth <= 480;
 
-            if (windowAspect > videoAspect) {
+            if (isMobileView) {
+                // Let CSS handle mobile positioning
+                video.style.width = '100%';
+                video.style.height = '100%';
+            } else if (windowAspect > videoAspect) {
                 video.style.width = '100vw';
                 video.style.height = 'auto';
             } else {
