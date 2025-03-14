@@ -10,13 +10,17 @@ const videoSource = video.querySelector('source');
 const mobileVideoUrl = import.meta.env.VITE_VIDEO_MOBILE_URL;
 const desktopVideoUrl = import.meta.env.VITE_VIDEO_DESKTOP_URL;
 
-// Verify environment variables
-console.log('Environment check:', {
+// Debug video configuration
+console.log('Video Configuration:', {
     isMobile,
-    videoSource: isMobile ? mobileVideoUrl : desktopVideoUrl
+    mobileUrl: mobileVideoUrl,
+    desktopUrl: desktopVideoUrl,
+    currentUrl: isMobile ? mobileVideoUrl : desktopVideoUrl
 });
 
+// Set video source and trigger load
 videoSource.src = isMobile ? mobileVideoUrl : desktopVideoUrl;
+video.load(); // Explicitly load the new source
 
 // Apply mobile-specific optimizations
 if (isMobile) {
@@ -25,15 +29,25 @@ if (isMobile) {
     video.style.objectFit = 'cover'; // Ensure proper scaling on mobile
 }
 
-// Load video with error handling
-try {
-    video.load();
-} catch (e) {
-    console.warn('Video loading failed:', e);
-    // Fallback to static background if video fails
+// Enhanced video error handling and debugging
+video.addEventListener('error', (e) => {
+    console.error('Video error:', {
+        error: e.target.error,
+        currentSrc: video.currentSrc,
+        readyState: video.readyState,
+        networkState: video.networkState
+    });
     video.style.display = 'none';
     document.querySelector('.video-background').style.backgroundColor = '#000';
-}
+});
+
+// Debug video loading states
+video.addEventListener('loadstart', () => console.log('Video: loadstart'));
+video.addEventListener('loadeddata', () => console.log('Video: loadeddata'));
+video.addEventListener('canplay', () => console.log('Video: canplay'));
+video.addEventListener('playing', () => console.log('Video: playing'));
+video.addEventListener('waiting', () => console.log('Video: waiting'));
+
 
 // Optimize video playback and fitting
 const optimizeVideo = () => {
