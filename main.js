@@ -1,3 +1,8 @@
+import Lenis from '@studio-freight/lenis';
+
+// Initialize Lenis for smooth scrolling
+const lenis = new Lenis();
+
 // Handle video background with mobile optimization
 const video = document.getElementById('bgVideo');
 
@@ -19,7 +24,7 @@ console.log('Video Configuration:', {
 });
 
 // Set video source and trigger load
-videoSource.src = isMobile ? mobileVideoUrl : desktopVideoUrl;
+videoSource.setAttribute('src', isMobile ? mobileVideoUrl : desktopVideoUrl);
 video.load(); // Explicitly load the new source
 
 // Apply mobile-specific optimizations
@@ -223,13 +228,18 @@ class XMarquee {
 // Initialize X posts marquee
 new XMarquee();
 
-// Initialize smooth scrolling
-const lenis = new Lenis({
+// Update Lenis configuration
+lenis.options = {
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   direction: 'vertical',
   smooth: true,
-});
+};
+
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
 
 function raf(time) {
   lenis.raf(time);
