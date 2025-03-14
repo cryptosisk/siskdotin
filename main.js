@@ -27,14 +27,14 @@ const initializeVideo = async () => {
 
         // Log environment variables state
         console.log('Environment state:', {
-            supabaseUrl: import.meta.env.VITE_SUPABASE_URL ? 'present' : 'missing',
-            supabaseKey: import.meta.env.VITE_SUPABASE_ANON_KEY ? 'present' : 'missing',
-            mobileUrl: import.meta.env.VITE_VIDEO_MOBILE_URL ? 'present' : 'missing',
-            desktopUrl: import.meta.env.VITE_VIDEO_DESKTOP_URL ? 'present' : 'missing'
+            supabaseUrl: process.env.VITE_SUPABASE_URL ? 'present' : 'missing',
+            supabaseKey: process.env.VITE_SUPABASE_ANON_KEY ? 'present' : 'missing',
+            mobileUrl: process.env.VITE_VIDEO_MOBILE_URL ? 'present' : 'missing',
+            desktopUrl: process.env.VITE_VIDEO_DESKTOP_URL ? 'present' : 'missing'
         });
 
-        const mobileVideoUrl = import.meta.env.VITE_VIDEO_MOBILE_URL;
-        const desktopVideoUrl = import.meta.env.VITE_VIDEO_DESKTOP_URL;
+        const mobileVideoUrl = process.env.VITE_VIDEO_MOBILE_URL;
+        const desktopVideoUrl = process.env.VITE_VIDEO_DESKTOP_URL;
 
         if (!mobileVideoUrl || !desktopVideoUrl) {
             throw new Error(`Video URLs missing: Mobile=${!!mobileVideoUrl}, Desktop=${!!desktopVideoUrl}. Check Vercel environment variables.`);
