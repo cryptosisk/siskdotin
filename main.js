@@ -5,27 +5,10 @@ const video = document.getElementById('bgVideo');
 const isMobile = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                 (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 
-// Debug environment variables
-console.log('Environment Variables:', {
-    all: import.meta.env,
-    mode: import.meta.env.MODE,
-    videoMobile: import.meta.env.VITE_VIDEO_MOBILE_URL,
-    videoDesktop: import.meta.env.VITE_VIDEO_DESKTOP_URL
-});
-
 // Configure video source and settings based on device
 const videoSource = video.querySelector('source');
 const mobileVideoUrl = import.meta.env.VITE_VIDEO_MOBILE_URL;
 const desktopVideoUrl = import.meta.env.VITE_VIDEO_DESKTOP_URL;
-
-// Verify URLs before setting
-if (!mobileVideoUrl || !desktopVideoUrl) {
-    console.error('Video URLs not found in environment variables:', {
-        mobileUrl: mobileVideoUrl,
-        desktopUrl: desktopVideoUrl
-    });
-    throw new Error('Video URLs not configured properly');
-}
 
 // Debug video configuration
 console.log('Video Configuration:', {
