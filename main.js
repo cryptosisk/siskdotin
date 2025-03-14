@@ -28,7 +28,7 @@ const initializeVideo = async () => {
         // Log environment variables state
         console.log('Environment state:', {
             supabaseUrl: process.env.VITE_SUPABASE_URL ? 'present' : 'missing',
-            supabaseKey: process.env.VITE_SUPABASE_ANON_KEY ? 'present' : 'missing',
+            supabasePublicKey: process.env.VITE_SUPABASE_PUBLIC_KEY ? 'present' : 'missing',
             mobileUrl: process.env.VITE_VIDEO_MOBILE_URL ? 'present' : 'missing',
             desktopUrl: process.env.VITE_VIDEO_DESKTOP_URL ? 'present' : 'missing'
         });

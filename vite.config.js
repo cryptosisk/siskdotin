@@ -30,7 +30,7 @@ export default defineConfig(({ mode }) => {
   // Define environment variables
   define: {
     'process.env.VITE_SUPABASE_URL': JSON.stringify(env.VITE_SUPABASE_URL),
-    'process.env.VITE_SUPABASE_ANON_KEY': JSON.stringify(env.VITE_SUPABASE_ANON_KEY),
+    'process.env.VITE_SUPABASE_PUBLIC_KEY': JSON.stringify(env.VITE_SUPABASE_PUBLIC_KEY),
     'process.env.VITE_VIDEO_DESKTOP_URL': JSON.stringify(env.VITE_VIDEO_DESKTOP_URL),
     'process.env.VITE_VIDEO_MOBILE_URL': JSON.stringify(env.VITE_VIDEO_MOBILE_URL)
   }
