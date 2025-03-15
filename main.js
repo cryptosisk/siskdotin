@@ -1,4 +1,6 @@
 import Lenis from '@studio-freight/lenis';
+import { Tree } from './components/FileTree.js';
+import { SITE_STRUCTURE } from './components/siteStructure.js';
 
 // Initialize Lenis for smooth scrolling
 const lenis = new Lenis({
@@ -266,6 +268,30 @@ class XMarquee {
 
 // Initialize all components
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize file tree
+    const treeContainer = document.createElement('div');
+    treeContainer.className = 'file-tree';
+    document.body.appendChild(treeContainer);
+
+    const fileTree = new Tree(treeContainer, {
+        initialSelectedId: '1',
+        initialExpandedItems: ['1', '2', '5', '8'],
+        elements: SITE_STRUCTURE
+    });
+
+    // Add navigation handling
+    treeContainer.addEventListener('click', (e) => {
+        const fileElement = e.target.closest('.file');
+        const folderHeader = e.target.closest('.folder-header');
+        
+        if (fileElement || folderHeader) {
+            const name = e.target.closest('.name')?.textContent;
+            if (name) {
+                // Handle navigation here
+                console.log('Navigating to:', name);
+            }
+        }
+    });
     // Initialize video
     initializeVideo();
 
