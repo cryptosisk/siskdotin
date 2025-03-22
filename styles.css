@@ -191,8 +191,177 @@ section {
   opacity: 0; /* Start with spans hidden */
 }
 
+/* Reusable Gradient Border Component */
+@keyframes rotate-gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.gradient-border-component {
+    position: relative;
+    background: linear-gradient(var(--gradient-angle, 45deg), 
+        rgba(100, 108, 255, 0.8),
+        rgba(83, 91, 242, 0.8),
+        rgba(57, 255, 20, 0.8),
+        rgba(100, 108, 255, 0.8));
+    background-size: 300% 300%;
+    animation: rotate-gradient 3s linear infinite;
+    border-radius: var(--border-radius, 8px);
+}
+
+.gradient-border-component::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: var(--inner-bg, var(--background));
+    border-radius: calc(var(--border-radius, 8px) - 2px);
+    z-index: 0;
+}
+
+.gradient-border-component > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Test page styles */
+.test-page {
+    min-height: 100vh;
+    background: #262626;
+    padding: 5%;
+}
+
+/* File Tree Styles */
+.file-tree-container {
+    position: relative;
+    display: flex;
+    width: 300px;
+    padding: 2px;
+    background: linear-gradient(var(--angle, 0deg), #6CCED9, #6CD98F, #D96C6E, #6CCED9);
+    animation: 5s rotate linear infinite;
+    border-radius: 4px;
+}
+
+@property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+}
+
+@keyframes rotate {
+    to {
+        --angle: 360deg;
+    }
+}
+
+.file-tree {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    background: #262626;
+    padding: 20px;
+    border-radius: 2px;
+    font-family: 'Menlo', monospace;
+    font-size: 14px;
+    color: #fff;
+}
+
+.tree-folder, .tree-file {
+    padding: 4px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tree-folder {
+    user-select: none;
+}
+
+.folder-children {
+    height: 0;
+    overflow: hidden;
+    margin-left: 20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.tree-folder.expanded > .folder-children {
+    height: auto;
+    opacity: 1;
+}
+
+.folder-name, .tree-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.folder-name:hover, .tree-file:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tree-file.clickable {
+    color: #6CCED9;
+    cursor: pointer;
+}
+
+.tree-file.clickable:hover {
+    background: rgba(108, 206, 217, 0.1);
+}
+
+.tree-file.selected {
+    background: rgba(108, 206, 217, 0.2);
+    position: relative;
+}
+
+.tree-file.selected::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: #6CCED9;
+}
+
+.folder-icon, .file-icon {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
 /* Mobile-first responsive design */
 @media (max-width: 480px) {
+  .file-tree-container {
+    width: 90%;
+    max-width: 300px;
+  }
+
+  .file-tree {
+    padding: 15px;
+    font-size: 12px;
+  }
+
+  .folder-icon, .file-icon {
+    font-size: 14px;
+  }
+
   #bgVideo {
     object-position: center bottom;
     height: 100%;
