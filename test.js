@@ -15,26 +15,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     type: 'folder',
                     name: 'current projects',
                     children: [
-                        { type: 'file', name: 'Nucels DAO' },
-                        { type: 'file', name: 'Irreversible DAO' },
-                        { type: 'file', name: 'Vehicle DAO' }
+                        { type: 'file', name: 'Nucels DAO', path: '/projects/nucels' },
+                        { type: 'file', name: 'Irreversible DAO', path: '/projects/irreversible' },
+                        { type: 'file', name: 'Vehicle DAO', path: '/projects/vehicle' }
                     ]
                 },
                 {
                     type: 'folder',
                     name: 'personal',
                     children: [
-                        { type: 'file', name: 'X posts & threads' },
-                        { type: 'file', name: 'ideas' },
-                        { type: 'file', name: 'books/films' }
+                        { type: 'file', name: 'X posts & threads', path: '/personal/posts' },
+                        { type: 'file', name: 'ideas', path: '/personal/ideas' },
+                        { type: 'file', name: 'books/films', path: '/personal/media' }
                     ]
                 },
                 {
                     type: 'folder',
                     name: 'past projects',
                     children: [
-                        { type: 'file', name: 'past projects' },
-                        { type: 'file', name: 'contact' }
+                        { type: 'file', name: 'past projects', path: '/past-projects' },
+                        { type: 'file', name: 'contact', path: '/contact' }
                     ]
                 }
             ]

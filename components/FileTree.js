@@ -1,8 +1,12 @@
+import { ProjectPage } from './ProjectPage.js';
+import { nucelsDaoContent } from '../pages/projects/nucels.js';
+
 // FileTree Component
 class FileTree {
     constructor(container) {
         this.container = container;
         this.structure = [];
+        this.contentArea = document.querySelector('.content-area');
     }
 
     // Set the data structure
@@ -69,18 +73,38 @@ class FileTree {
         `;
         
         // Add click handler for file selection and navigation
-        fileDiv.addEventListener('click', () => {
+        fileDiv.addEventListener('click', async () => {
             document.querySelectorAll('.tree-file').forEach(f => f.classList.remove('selected'));
             fileDiv.classList.add('selected');
             
-            // Handle navigation if link is provided
-            if (item.link) {
-                window.location.href = item.link;
+            // Handle navigation and content loading
+            if (item.link === '/') {
+                window.location.href = '/';
+                return;
+            }
+            
+            if (this.contentArea && item.path) {
+                // Remove visible class
+                this.contentArea.classList.remove('visible');
+                
+                // Wait for fade out
+                await new Promise(resolve => setTimeout(resolve, 300));
+                
+                // Load content based on path
+                if (item.path === '/projects/nucels') {
+                    this.contentArea.innerHTML = ProjectPage(nucelsDaoContent);
+                }
+                // Add more page handlers here
+                
+                // Show content with animation
+                requestAnimationFrame(() => {
+                    this.contentArea.classList.add('visible');
+                });
             }
         });
         
         // Add hover style for clickable items
-        if (item.link) {
+        if (item.link || item.path) {
             fileDiv.classList.add('clickable');
         }
         
